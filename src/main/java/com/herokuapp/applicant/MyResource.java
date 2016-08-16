@@ -67,9 +67,9 @@ public class MyResource {
 				
 		if (entityManagerFactory == null) {
 			try {
-				entityManagerFactory = Persistence.createEntityManagerFactory("applicant-db", getProperties());
+				entityManagerFactory = Persistence.createEntityManagerFactory("applicant", getProperties());
 			} catch (URISyntaxException e) {
-				entityManagerFactory = Persistence.createEntityManagerFactory("applicant-db");
+				entityManagerFactory = Persistence.createEntityManagerFactory("applicant");
 			}	
 		}
 		return entityManagerFactory.createEntityManager();
