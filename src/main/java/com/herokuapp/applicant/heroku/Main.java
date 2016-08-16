@@ -8,8 +8,8 @@ import org.eclipse.jetty.webapp.WebAppContext;
  * command that is used for launching should fire this main method.
  */
 public class Main {
-
-    public static void main(String[] args) throws Exception{
+	
+	public static void main(String[] args) throws Exception{
         // The port that we should run on can be set into an environment variable
         // Look for that variable and default to 8080 if it isn't there.
         String webPort = System.getenv("PORT");
@@ -36,5 +36,6 @@ public class Main {
 
         server.start();
         server.join();
+        
     }
 }

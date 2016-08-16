@@ -12,7 +12,7 @@ public class EducationPK implements Serializable {
 	//default serial version id, required for serializable classes.
 	private static final long serialVersionUID = 1L;
 
-	@Column(name="applicant_id", insertable=false, updatable=false)
+	@Column(name="applicant_id")
 	private Integer applicantId;
 
 	@Temporal(TemporalType.DATE)

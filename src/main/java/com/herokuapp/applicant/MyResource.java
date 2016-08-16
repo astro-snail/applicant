@@ -2,6 +2,7 @@ package com.herokuapp.applicant;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.sql.DriverManager;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -66,6 +67,10 @@ public class MyResource {
 	private EntityManager getEntityManager() {
 				
 		if (entityManagerFactory == null) {
+			try {
+				Class.forName("org.postgresql.Driver");
+			} catch (ClassNotFoundException e) {
+			}
 			try {
 				entityManagerFactory = Persistence.createEntityManagerFactory("applicant", getProperties());
 			} catch (URISyntaxException e) {
