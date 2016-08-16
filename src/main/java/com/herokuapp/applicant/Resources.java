@@ -2,7 +2,6 @@ package com.herokuapp.applicant;
 
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.sql.DriverManager;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,8 +22,8 @@ import com.herokuapp.applicant.db.*;
 /**
  * Root resource (exposed at "myresource" path)
  */
-@Path("myresource")
-public class MyResource {
+@Path("resources")
+public class Resources {
 	
 	private static EntityManagerFactory entityManagerFactory;
 	
