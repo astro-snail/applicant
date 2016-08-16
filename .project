@@ -39,4 +39,11 @@
 		<nature>org.eclipse.wst.common.project.facet.core.nature</nature>
 		<nature>org.eclipse.wst.jsdt.core.jsNature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>src/main/java/META-INF</name>
+			<type>2</type>
+			<location>C:/Users/Elena/git/applicant/src/main/resources/META-INF</location>
+		</link>
+	</linkedResources>
 </projectDescription>

@@ -28,11 +28,11 @@ public class MyResourceTest extends JerseyTest {
         
     }
     
-    /*@Test
+    @Test
     public void testApplicants() {
         int status = target().path("myresource/applicants").request().get().getStatus();
 
-        assertEquals(500, status);
+        assertEquals(200, status);
         
-    }*/
+    }
 }
