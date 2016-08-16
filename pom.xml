@@ -51,6 +51,11 @@
             <type>pom</type>
             <scope>test</scope>
         </dependency>
+        <dependency>
+        	<groupId>org.eclipse.persistence</groupId>
+        	<artifactId>eclipselink</artifactId>
+        	<version>${eclipselink.version}</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -102,5 +107,6 @@
         <jersey.version>2.23.2</jersey.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <jetty.version>9.0.6.v20130930</jetty.version>
+        <eclipselink.version>2.5.2</eclipselink.version>
     </properties>
 </project>
