@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    	<meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    	<title>Applicants</title>
+    
+    	<link href="css/custom-styles.css" rel="stylesheet">
+		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+        <![endif]-->
+        
+        <script src="https://code.jquery.com/jquery-3.1.0.min.js" 
+				integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" 
+				crossorigin="anonymous"></script>
+        
+        <script src="js/govuk/selection-buttons.js"></script>
+        <script src="js/govuk/stick-at-top-when-scrolling.js"></script>
+        <script src="js/custom-scripts.js"></script>
+		
+	</head>
+    
+	<body>
+		<div id="page-container">
+            <div class="grid-row js-stick-at-top-when-scrolling" style="color:white;background-color:darkblue;margin-bottom:20px;">
+                <div class="column-full">
+                    <h3>Applications</h3>
+                </div>
+            </div>    
+            <div class="grid-row">
+                <div class="column-half">
+                    <form name="form">
+                        <div class="grid-row">
+                            <div class="column-quarter">
+                                <label>Search by:</label>
+                            </div>
+                            <div class="column-three-quarters">
+                                <label><input type="radio" name="searchmethod" id="searchmethod" value="id">Ref. number</label>
+                                <label><input type="radio" name="searchmethod" id="searchmethod" value="name">Name</label>
+                            </div>
+                        </div>
+                        <div class="grid-row">
+                            <div class="column-quarter">
+                                <label for="applicantId">Ref. number:</label>
+                            </div>
+                            <div class="column-three-quarters">
+                                <span style="display:block"><input title="Applicant's reference number" style="width:100%" type="search" id="applicantId" name="applicantId"></span>
+                            </div>
+                        </div>
+                        <div class="grid-row">
+                            <div class="column-quarter">
+                                <label for="firstName">First name:</label>
+                            </div>
+                            <div class="column-three-quarters">
+                                <span style="display:block"><input title="Applicant's first name" style="width:100%" type="search" id="firstName" name="firstName">
+                            </div>
+                        </div>
+                        <div class="grid-row">
+                            <div class="column-quarter">
+                                <label for="lastName">Last name:</label>
+                            </div>
+                            <div class="column-three-quarters">
+                                <span style="display:block"><input title="Applicant's last name"style="width:100%" type="search" id="lastName" name="lastName">
+                            </div>
+                        </div>
+                        <div class="grid-row">
+                            <div class="column-quarter">
+                                <p padding="20px"></p>
+                            </div>    
+                            <div class="column-quarter">
+                                <span style="display:block"><button style="width:100%" class="button" type="submit" name="search">Search</button></span>
+                            </div>
+                            <div class="column-quarter">
+                                <span style="display:block"><button style="width:100%" class="button-secondary" type="submit" name="search">Clear</button></span>
+                            </div>
+                        </div>
+                    </form>
+                </div>    
+                <div class="column-half">
+                    <img src="images/Belka.jpg" width="100%">
+                </div>
+            </div>
+            <div class="grid-row">
+                <div class="column-full">
+                    <div id = "dvContent"></div>
+                </div>    
+            </div>    
+            <div class="grid-row">
+                <div class="column-full">
+                    <label>
+                        <input type="radio" name="size"/>Radio
+                    </label>
+                    <label>
+                        <input type="checkbox" name="nosize" value="medium" />Checkbox
+                    </label>
+                </div>
+            </div>    
+        </div>
+    </body>
+    
+</html>
