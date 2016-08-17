@@ -14,7 +14,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @Table(name="applicant_view")
 @NamedQueries({
-	@NamedQuery(name="Applicant.findAll", query="SELECT a FROM Applicant a"),
+	@NamedQuery(name="Applicant.findAll", query="SELECT a FROM Applicant a ORDER BY a.applicantId"),
 	@NamedQuery(name="Applicant.findbyName", query="SELECT a FROM Applicant a WHERE a.firstName = :firstName AND a.lastName = :lastName")
 })
 public class Applicant implements Serializable {

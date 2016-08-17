@@ -13,7 +13,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Entity
 @XmlRootElement
 @Table(name="work_experience")
-@NamedQuery(name="Experience.findAllForApplicant", query="SELECT e FROM Experience e WHERE e.id.applicantId = :id")
+@NamedQuery(name="Experience.findAllForApplicant", query="SELECT e FROM Experience e WHERE e.id.applicantId = :id ORDER BY e.id.dateFrom DESC")
 public class Experience implements Serializable {
 	private static final long serialVersionUID = 1L;
 

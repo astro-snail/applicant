@@ -12,7 +12,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @Entity
 @XmlRootElement
-@NamedQuery(name="Education.findAllForApplicant", query="SELECT e FROM Education e WHERE e.id.applicantId = :id")
+@NamedQuery(name="Education.findAllForApplicant", query="SELECT e FROM Education e WHERE e.id.applicantId = :id ORDER BY e.id.dateFrom DESC")
 public class Education implements Serializable {
 	private static final long serialVersionUID = 1L;
 

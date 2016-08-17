@@ -19,7 +19,7 @@
         <script src="https://code.jquery.com/jquery-3.1.0.min.js" 
 				integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" 
 				crossorigin="anonymous"></script>
-        
+        <script src="js/jquery-dateFormat.js"></script>
         <script src="js/govuk/selection-buttons.js"></script>
         <script src="js/govuk/stick-at-top-when-scrolling.js"></script>
         <script src="js/custom-scripts.js"></script>
@@ -35,22 +35,22 @@
             </div>    
             <div class="grid-row">
                 <div class="column-half">
-                    <form name="form">
+                    <form id="search">
                         <div class="grid-row">
                             <div class="column-quarter">
                                 <label>Search by:</label>
                             </div>
                             <div class="column-three-quarters">
-                                <label><input type="radio" name="searchmethod" id="searchmethod" value="id">Ref. number</label>
+                                <label><input type="radio" name="searchmethod" id="searchmethod" value="id">ID</label>
                                 <label><input type="radio" name="searchmethod" id="searchmethod" value="name">Name</label>
                             </div>
                         </div>
                         <div class="grid-row">
                             <div class="column-quarter">
-                                <label for="applicantId">Ref. number:</label>
+                                <label for="applicantId">ID:</label>
                             </div>
                             <div class="column-three-quarters">
-                                <span style="display:block"><input title="Applicant's reference number" style="width:100%" type="search" id="applicantId" name="applicantId"></span>
+                                <span style="display:block"><input title="Applicant's ID" style="width:100%" type="search" id="applicantId" name="applicantId"></span>
                             </div>
                         </div>
                         <div class="grid-row">
@@ -58,7 +58,7 @@
                                 <label for="firstName">First name:</label>
                             </div>
                             <div class="column-three-quarters">
-                                <span style="display:block"><input title="Applicant's first name" style="width:100%" type="search" id="firstName" name="firstName">
+                                <span style="display:block"><input title="Applicant's first name" style="width:100%" type="search" id="firstName" name="firstName"></span>
                             </div>
                         </div>
                         <div class="grid-row">
@@ -66,7 +66,7 @@
                                 <label for="lastName">Last name:</label>
                             </div>
                             <div class="column-three-quarters">
-                                <span style="display:block"><input title="Applicant's last name"style="width:100%" type="search" id="lastName" name="lastName">
+                                <span style="display:block"><input title="Applicant's last name"style="width:100%" type="search" id="lastName" name="lastName"></span>
                             </div>
                         </div>
                         <div class="grid-row">
@@ -83,22 +83,20 @@
                     </form>
                 </div>    
                 <div class="column-half">
-                    <img src="images/Belka.jpg" width="100%">
+                    <img src="images/Belka.jpg" width="30%">
                 </div>
             </div>
             <div class="grid-row">
-                <div class="column-full">
-                    <div id = "dvContent"></div>
-                </div>    
-            </div>    
-            <div class="grid-row">
-                <div class="column-full">
-                    <label>
-                        <input type="radio" name="size"/>Radio
-                    </label>
-                    <label>
-                        <input type="checkbox" name="nosize" value="medium" />Checkbox
-                    </label>
+                <div class="column-two-thirds">
+                    <table id="searchresults" width="100%">
+                        <thead>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Position applied</th>
+                            <th>Date applied</th>
+                            <th>Application Status</th>
+                        </thead>                    
+                    </table>
                 </div>
             </div>    
         </div>
