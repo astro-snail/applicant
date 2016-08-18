@@ -105,22 +105,36 @@ public class Resources {
 		entityManager.close(); 
 		return result;
     }
- 
+    
     @GET
     @Produces(MediaType.APPLICATION_XML)
     @Path("/applicants/{firstName}/{lastName}")
     public List<Applicant> findByName(@PathParam("firstName") String firstName,
-    		                          @PathParam("lastName") String lastName) {
+    						          @PathParam("lastName") String lastName) {
+    	
     	EntityManager entityManager = getEntityManager();
     	EntityTransaction transaction = entityManager.getTransaction();
 		transaction.begin();
 		Query query = entityManager.createNamedQuery("Applicant.findByName");
 		query.setParameter("firstName", firstName);
-	    query.setParameter("lastName", lastName);
-	    List<Applicant> resultList = query.getResultList();
+		query.setParameter("lastName", lastName);
+		List<Applicant> resultList = query.getResultList();
 	    transaction.commit();
-		entityManager.close(); 
+		entityManager.close();
 		return resultList;
+    }
+    
+    @GET
+    @Produces(MediaType.APPLICATION_XML)
+    @Path("/applicants/{id}/details")
+    public ApplicantDetails getDetailsById(@PathParam("id") int id) {
+    	EntityManager entityManager = getEntityManager();
+    	EntityTransaction transaction = entityManager.getTransaction();
+		transaction.begin();
+		ApplicantDetails result = entityManager.find(ApplicantDetails.class, id);
+		transaction.commit();
+		entityManager.close(); 
+		return result;
     }
     
     @GET

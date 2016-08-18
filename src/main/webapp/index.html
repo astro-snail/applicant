@@ -6,7 +6,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
     	<meta name="viewport" content="width=device-width, initial-scale=1">
     
-    	<title>Applicants</title>
+    	<title>Applications</title>
     
     	<link href="css/custom-styles.css" rel="stylesheet">
 		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -16,9 +16,10 @@
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
         <![endif]-->
         
-        <script src="https://code.jquery.com/jquery-3.1.0.min.js" 
+        <!--<script src="https://code.jquery.com/jquery-3.1.0.min.js" 
 				integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" 
-				crossorigin="anonymous"></script>
+				crossorigin="anonymous"></script>-->
+        <script src="js/jquery-3.1.0.min.js"></script>
         <script src="js/jquery-dateFormat.js"></script>
         <script src="js/govuk/selection-buttons.js"></script>
         <script src="js/govuk/stick-at-top-when-scrolling.js"></script>
@@ -28,9 +29,11 @@
     
 	<body>
 		<div id="page-container">
-            <div class="grid-row js-stick-at-top-when-scrolling" style="color:white;background-color:darkblue;margin-bottom:20px;">
+            <div class="grid-row">
                 <div class="column-full">
-                    <h3>Applications</h3>
+                    <div class="page-header js-stick-at-top-when-scrolling">
+                        <h3>Applications</h3>
+                    </div>    
                 </div>
             </div>    
             <div class="grid-row">
@@ -41,43 +44,43 @@
                                 <label>Search by:</label>
                             </div>
                             <div class="column-three-quarters">
-                                <label><input type="radio" name="searchmethod" id="searchmethod" value="id">ID</label>
+                                <label><input type="radio" name="searchmethod" id="searchmethod" value="id" checked=true>ID</label>
                                 <label><input type="radio" name="searchmethod" id="searchmethod" value="name">Name</label>
                             </div>
                         </div>
-                        <div class="grid-row">
+                        <div class="grid-row search-id">
                             <div class="column-quarter">
                                 <label for="applicantId">ID:</label>
                             </div>
                             <div class="column-three-quarters">
-                                <span style="display:block"><input title="Applicant's ID" style="width:100%" type="search" id="applicantId" name="applicantId"></span>
+                                <span><input title="Applicant's ID" type="search" id="applicantId" name="applicantId"></span>
                             </div>
                         </div>
-                        <div class="grid-row">
+                        <div class="grid-row search-name">
                             <div class="column-quarter">
                                 <label for="firstName">First name:</label>
                             </div>
                             <div class="column-three-quarters">
-                                <span style="display:block"><input title="Applicant's first name" style="width:100%" type="search" id="firstName" name="firstName"></span>
+                                <span><input title="Applicant's first name" type="search" id="firstName" name="firstName"></span>
                             </div>
                         </div>
-                        <div class="grid-row">
+                        <div class="grid-row search-name">
                             <div class="column-quarter">
                                 <label for="lastName">Last name:</label>
                             </div>
                             <div class="column-three-quarters">
-                                <span style="display:block"><input title="Applicant's last name"style="width:100%" type="search" id="lastName" name="lastName"></span>
+                                <span><input title="Applicant's last name"type="search" id="lastName" name="lastName"></span>
                             </div>
                         </div>
                         <div class="grid-row">
                             <div class="column-quarter">
                                 <p padding="20px"></p>
                             </div>    
-                            <div class="column-quarter">
-                                <span style="display:block"><button style="width:100%" class="button" type="submit" name="search">Search</button></span>
-                            </div>
-                            <div class="column-quarter">
-                                <span style="display:block"><button style="width:100%" class="button-secondary" type="submit" name="search">Clear</button></span>
+                            <div class="column-three-quarters">
+                                <span>
+                                    <button class="button" type="submit" name="search">Search</button>
+                                    <button class="button-secondary" type="submit" name="search">Clear</button>
+                                </span>
                             </div>
                         </div>
                     </form>
@@ -86,20 +89,83 @@
                     <img src="images/Belka.jpg" width="30%">
                 </div>
             </div>
-            <div class="grid-row">
-                <div class="column-two-thirds">
-                    <table id="searchresults" width="100%">
-                        <thead>
-                            <th>ID</th>
-                            <th>Name</th>
-                            <th>Position applied</th>
-                            <th>Date applied</th>
-                            <th>Application Status</th>
-                        </thead>                    
-                    </table>
+            
+            <!-- Search results -->
+            <div id="searchresults" class="hidden">
+                <div class="grid-row">
+                    <div class="column-two-thirds">
+                        <div class="table-content">
+                            <table>
+                                <thead class="section-header">
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>Position applied</th>
+                                    <th>Date applied</th>
+                                    <th>Application Status</th>
+                                </thead>  
+                                <tbody class="section-content"></tbody>
+                            </table>
+                        </div>
+                    </div> 
+                </div>
+            </div>
+            
+            <!-- Details -->
+            <div id="details" class="hidden">
+                <!-- Personal data (address, phone number, email etc.) -->
+                <div id="personaldata">
+                    <div class="grid-row">
+                        <div class="column-two-thirds">
+                            <div class="section-header">
+                                <strong>Personal Data</strong>
+                            </div>    
+                        </div>
+                    </div>    
+                    <div class="grid-row">
+                        <div class="column-two-thirds">
+                            <div class="section-content">                                
+                            </div>   
+                        </div>                    
+                    </div>
+                    
+                </div>
+                
+                <!-- Experience -->
+                <div id="experience">
+                    <div class="grid-row">
+                        <div class="column-two-thirds">
+                            <div class="section-header">
+                                <strong>Work Experience</strong>
+                            </div>
+                        </div>
+                    </div>    
+                    
+                    <div class="grid-row">
+                        <div class="column-two-thirds">
+                            <div class="section-content">
+                            </div>                            
+                        </div>
+                    </div>                    
+                </div>
+                
+                <!-- Education -->
+                <div id="education">
+                    <div class="grid-row">
+                        <div class="column-two-thirds">
+                            <div class="section-header">
+                                <strong>Education</strong>
+                            </div>
+                        </div>    
+                    </div>   
+                    
+                    <div class="grid-row">
+                        <div class="column-two-thirds">
+                            <div class="section-content">
+                            </div>
+                        </div>
+                    </div>    
                 </div>
             </div>    
         </div>
     </body>
-    
 </html>

@@ -316,6 +316,55 @@ h1 {
   top: 0; }
 
 .shim {
-  display: block; }
+  display: block; 
+}
+
+/* IMPORTANT - NOT GENERATED - REPLACE!!! */
+.page-header {
+    color: white;
+    background-color: darkblue;
+    margin-bottom: 20px;
+    padding: 7px;
+}
+
+.section-header {
+    color: white;
+    background-color: darkblue;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    padding: 5px;
+    text-align: left;
+}
+
+.table-content {
+    overflow-x: scroll;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    border: 1px solid #bbb;
+}
+
+td, th {
+    border-top: 1px solid #bbb;
+    padding: 4px 8px;
+}
+
+span {
+    display: block;
+}
+
+input {
+    margin-bottom: 5px;
+}
+
+input[type=search] {
+    width: 100%;
+}
+
+button {
+    width: 40%;
+}
 
 /*# sourceMappingURL=styles.css.map */
