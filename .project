@@ -43,7 +43,7 @@
 		<link>
 			<name>src/main/java/META-INF</name>
 			<type>2</type>
-			<location>C:/Users/Elena/git/applicant/src/main/resources/META-INF</location>
+			<locationURI>PROJECT_LOC/src/main/resources/META-INF</locationURI>
 		</link>
 	</linkedResources>
 </projectDescription>
