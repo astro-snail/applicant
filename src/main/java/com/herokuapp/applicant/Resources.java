@@ -81,6 +81,98 @@ public class Resources {
 	
 	@GET
     @Produces(MediaType.APPLICATION_XML)
+	@Path("/positions")
+	public List<Position> getPositionsAll() {
+		EntityManager entityManager = getEntityManager();
+		EntityTransaction transaction = entityManager.getTransaction();
+		transaction.begin();
+		Query query = entityManager.createNamedQuery("Position.findAll");
+	    List<Position> resultList = query.getResultList();
+	    transaction.commit();
+		entityManager.close(); 
+		return resultList;
+	}
+	    
+    @GET
+    @Produces(MediaType.APPLICATION_XML)
+    @Path("/positions/{id}")
+    public Position getPositionsById(@PathParam("id") int id) {
+    	EntityManager entityManager = getEntityManager();
+    	EntityTransaction transaction = entityManager.getTransaction();
+		transaction.begin();
+		Position result = entityManager.find(Position.class, id);
+		transaction.commit();
+		entityManager.close(); 
+		return result;
+    }
+	
+	@GET
+    @Produces(MediaType.APPLICATION_XML)
+	@Path("/applications")
+	public List<Application> getApplicationsAll() {
+		EntityManager entityManager = getEntityManager();
+		EntityTransaction transaction = entityManager.getTransaction();
+		transaction.begin();
+		Query query = entityManager.createNamedQuery("Application.findAll");
+	    List<Application> resultList = query.getResultList();
+	    transaction.commit();
+		entityManager.close(); 
+		return resultList;
+	}
+	    
+    @GET
+    @Produces(MediaType.APPLICATION_XML)
+    @Path("/applications/{positionId}")
+    public List<Application> getApplicationsByPositionId(@PathParam("positionId") int positionId) {
+    	EntityManager entityManager = getEntityManager();
+    	EntityTransaction transaction = entityManager.getTransaction();
+		transaction.begin();
+		Query query = entityManager.createNamedQuery("Application.findByPositionId");
+		query.setParameter("positionId", positionId);
+		List<Application> resultList = query.getResultList();
+		transaction.commit();
+		entityManager.close(); 
+		return resultList;
+    }
+    
+    @GET
+    @Produces(MediaType.APPLICATION_XML)
+    @Path("/applications/{positionId}/{applicantId}")
+    public Application getApplicationByPositionIdByApplicantId(@PathParam("positionId") int positionId,
+    		                                                   @PathParam("applicantId") int applicantId) {
+    	ApplicationPK id = new ApplicationPK();
+    	id.setPositionId(positionId);
+    	id.setApplicantId(applicantId);
+    	EntityManager entityManager = getEntityManager();
+    	EntityTransaction transaction = entityManager.getTransaction();
+		transaction.begin();
+		Application result = entityManager.find(Application.class, id);
+		transaction.commit();
+		entityManager.close(); 
+		return result;
+    }
+    
+    @GET
+    @Produces(MediaType.APPLICATION_XML)
+    @Path("/applications/{positionId}/{firstName}/{lastName}")
+    public List<Application> getApplicationsByPositionIdByApplicantName(@PathParam("positionId") int positionId,
+    		                                                            @PathParam("firstName") String firstName,
+    		                                                            @PathParam("lastName") String lastName) {
+    	EntityManager entityManager = getEntityManager();
+    	EntityTransaction transaction = entityManager.getTransaction();
+		transaction.begin();
+		Query query = entityManager.createNamedQuery("Application.findByPositionIdByApplicantName");
+		query.setParameter("positionId", positionId);
+		query.setParameter("firstName", firstName);
+		query.setParameter("lastName", lastName);
+		List<Application> resultList = query.getResultList();
+		transaction.commit();
+		entityManager.close(); 
+		return resultList;
+    }
+	
+	@GET
+    @Produces(MediaType.APPLICATION_XML)
 	@Path("/applicants")
 	public List<Applicant> getAll() {
 		EntityManager entityManager = getEntityManager();
@@ -101,37 +193,6 @@ public class Resources {
     	EntityTransaction transaction = entityManager.getTransaction();
 		transaction.begin();
 		Applicant result = entityManager.find(Applicant.class, id);
-		transaction.commit();
-		entityManager.close(); 
-		return result;
-    }
-    
-    @GET
-    @Produces(MediaType.APPLICATION_XML)
-    @Path("/applicants/{firstName}/{lastName}")
-    public List<Applicant> findByName(@PathParam("firstName") String firstName,
-    						          @PathParam("lastName") String lastName) {
-    	
-    	EntityManager entityManager = getEntityManager();
-    	EntityTransaction transaction = entityManager.getTransaction();
-		transaction.begin();
-		Query query = entityManager.createNamedQuery("Applicant.findByName");
-		query.setParameter("firstName", firstName);
-		query.setParameter("lastName", lastName);
-		List<Applicant> resultList = query.getResultList();
-	    transaction.commit();
-		entityManager.close();
-		return resultList;
-    }
-    
-    @GET
-    @Produces(MediaType.APPLICATION_XML)
-    @Path("/applicants/{id}/details")
-    public ApplicantDetails getDetailsById(@PathParam("id") int id) {
-    	EntityManager entityManager = getEntityManager();
-    	EntityTransaction transaction = entityManager.getTransaction();
-		transaction.begin();
-		ApplicantDetails result = entityManager.find(ApplicantDetails.class, id);
 		transaction.commit();
 		entityManager.close(); 
 		return result;

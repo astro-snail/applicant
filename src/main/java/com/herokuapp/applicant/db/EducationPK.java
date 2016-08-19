@@ -1,6 +1,8 @@
 package com.herokuapp.applicant.db;
 
 import java.io.Serializable;
+import java.util.Date;
+
 import javax.persistence.*;
 
 /**
@@ -14,10 +16,10 @@ public class EducationPK implements Serializable {
 
 	@Column(name="applicant_id")
 	private Integer applicantId;
-
+	
 	@Temporal(TemporalType.DATE)
 	@Column(name="date_from")
-	private java.util.Date dateFrom;
+	private Date dateFrom;
 
 	public EducationPK() {
 	}
@@ -27,10 +29,10 @@ public class EducationPK implements Serializable {
 	public void setApplicantId(Integer applicantId) {
 		this.applicantId = applicantId;
 	}
-	public java.util.Date getDateFrom() {
+	public Date getDateFrom() {
 		return this.dateFrom;
 	}
-	public void setDateFrom(java.util.Date dateFrom) {
+	public void setDateFrom(Date dateFrom) {
 		this.dateFrom = dateFrom;
 	}
 
@@ -43,8 +45,7 @@ public class EducationPK implements Serializable {
 		}
 		EducationPK castOther = (EducationPK)other;
 		return 
-			this.applicantId.equals(castOther.applicantId)
-			&& this.dateFrom.equals(castOther.dateFrom);
+			this.applicantId.equals(castOther.applicantId) && this.dateFrom.equals(castOther.dateFrom);
 	}
 
 	public int hashCode() {

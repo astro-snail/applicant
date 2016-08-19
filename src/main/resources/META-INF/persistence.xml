@@ -7,6 +7,8 @@
 		<class>com.herokuapp.applicant.db.EducationPK</class>
 		<class>com.herokuapp.applicant.db.Experience</class>
 		<class>com.herokuapp.applicant.db.ExperiencePK</class>
-		<class>com.herokuapp.applicant.db.ApplicantDetails</class>
+		<class>com.herokuapp.applicant.db.Application</class>
+		<class>com.herokuapp.applicant.db.ApplicationPK</class>
+		<class>com.herokuapp.applicant.db.Position</class>
 	</persistence-unit>
 </persistence>

@@ -1,9 +1,13 @@
 /**
- * 
+ * This script performs GET requests to retrieve the data in XML format from the server.
+ * The data is being parsed and used to build dynamic content.
  */
 
-var urlBase = "rest/resources/applicants";
+// Base URLs
+var urlList = "rest/resources/applications/1"; // All applications for position with ID = 1
+var urlDetails = "rest/resources/applicants";  // All applicants
 
+// Toggle form search fields
 function onSearchMethod(e) {
     var value = $("form input[name=searchmethod]:checked").val();
     if (value === "id") {
@@ -16,8 +20,9 @@ function onSearchMethod(e) {
     }
 }
 
+// Build URL according to the search criteria
 function buildUrl() {
-    var url = urlBase;
+    var url = urlList;
     
     if ($("form input[name=searchmethod]:checked").val() === "id") {
         var id = $("form input[name=applicantId]").val();
@@ -33,140 +38,116 @@ function buildUrl() {
     return url;
 }
 
-function onGetDetails(e) {
-    e.preventDefault();
-        
-    $("#details").hide();
-    $("#details .section-content").empty();
-    
-    var id = $(this).attr("id");
-    
-    // Get personal data
-    var urlD = urlBase + "/" + id + "/details";
-    $.ajax({
-	   url: urlD,
-	   type: "GET",
-	   dataType: "xml",
-    })
-    .done( function( xml ) {
-        $("<ul></ul>").appendTo("#personaldata .section-content");
-        $(xml).find("applicantDetails").each(addPersonalData);
-    })
-    .fail(function( xhr, status, errorThrown ) {
-        console.log( "Error: " + errorThrown );
-        console.log( "Status: " + status );
-        console.dir( xhr );
-    });
-        
-    // Get experience
-    var urlEx = urlBase + "/" + id + "/experience";
-    $.ajax({
-	   url: urlEx,
-	   type: "GET",
-	   dataType: "xml",
-    })
-    .done(function( xml ) {
-        $("<ul></ul>").appendTo("#experience .section-content");
-        $(xml).find("experience").each(addExperience);
-    })
-    .fail(function( xhr, status, errorThrown ) {
-        console.log( "Error: " + errorThrown );
-        console.log( "Status: " + status );
-        console.dir( xhr );
-    });
-    
-    // Get education
-    var urlEd = urlBase + "/" + id + "/education";
-    $.ajax({
-	   url: urlEd,
-	   type: "GET",
-	   dataType: "xml",
-    })
-    .done(function( xml ) {
-        $("<ul></ul>").appendTo("#education .section-content");
-        $(xml).find("education").each(addEducation);
-    })
-    .fail(function( xhr, status, errorThrown ) {
-        console.log( "Error: " + errorThrown );
-        console.log( "Status: " + status );
-        console.dir( xhr );
-    });
-    
-    $("#details").show();
+// Add a single field in the details section
+function addField(sel, name, value) {
+    $(sel).append("<div class='grid-row'></div>");
+    sel = sel + " .grid-row:last";
+    $(sel).append("<div class='column-third field-name'>" + name + "</div>");
+    $(sel).append("<div class='column-two-thirds field-value'>" + value + "</div>");
 }
 
+// Populate Personal Data section
 function addPersonalData() {
+    var sel = "#personaldata .section-content";
+    $(sel).append("<div class='sub-section'></div>");
+    sel = sel + " .sub-section:last";
+    
     var firstName = $(this).find("firstName").text();
-    $("<li></li>").html(firstName).appendTo("#personaldata ul");
-    
     var lastName = $(this).find("lastName").text();
-    $("<li></li>").html(lastName).appendTo("#personaldata ul");
-    
-    var mobile = $(this).find("mobile").text();
-    $("<li></li>").html(mobile).appendTo("#personaldata ul");
-    
-    var landline = $(this).find("landline").text();
-    $("<li></li>").html(landline).appendTo("#personaldata ul");
+    addField(sel, "Full name:", firstName + " " + lastName);
     
     var address = $(this).find("address").text();
-    $("<li></li>").html(address).appendTo("#personaldata ul");
+    addField(sel, "Address:", address);
+    
+    var mobile = $(this).find("mobile").text();
+    addField(sel, "Mobile:", mobile);
+    
+    var landline = $(this).find("landline").text();
+    addField(sel, "Landline:", landline);
     
     var email = $(this).find("email").text();
-    $("<li></li>").html(email).appendTo("#personaldata ul");
+    addField(sel, "E-Mail:", email);
     
-    var dob = $(this).find("dateOfBirth").text();
-    $("<li></li>").html(dob).appendTo("#personaldata ul");
-    
-    var gender = $(this).find("gender").text();
-    $("<li></li>").html(gender).appendTo("#personaldata ul");
-        
+    var dob = $.format.date($(this).find("dateOfBirth").text(), "dd.MM.yyyy");
+    addField(sel, "Date of birth", dob);
 }
 
+// Return "Now" when Date to is empty
+function getDateTo(text) {
+    if (text === '') return "Now"
+    else return text;
+}
+
+// Populate Experience section
 function addExperience() {
+    var sel = "#experience .section-content";
+    $(sel).append("<div class='sub-section'></div>");
+    sel = sel + " .sub-section:last";
+    
+    var dateFrom = $.format.date($(this).find("dateFrom").text(), "dd.MM.yyyy");
+    var dateTo = getDateTo($.format.date($(this).find("dateTo").text(), "dd.MM.yyyy"));
+    addField(sel, "Dates:", dateFrom + " - " + dateTo);
+        
     var company = $(this).find("companyName").text();
-    $("<li></li>").html(company).appendTo("#experience ul");
+    addField(sel, "Company name:", company);
     
     var position = $(this).find("position").text();
-    $("<li></li>").html(position).appendTo("#experience ul");
-    
-    var details = $(this).find("details").text();
-    $("<li></li>").html(details).appendTo("#experience ul");
-}
-
-
-function addEducation() {
-    var institution = $(this).find("educationalInstitution").text();
-    $("<li></li>").html(institution).appendTo("#education ul");
-    
-    var details = $(this).find("details").text();
-    $("<li></li>").html(details).appendTo("#education ul");
-}
-
-function addRecord() {
-    $("<tr></tr>").appendTo("#searchresults .section-content");
-    
-    var id = $(this).find("applicantId").text();
-    $("<td></td>").html(id).appendTo("tr:last");
-    
-    var firstName = $(this).find("firstName").text();
-    var lastName = $(this).find("lastName").text();
-    $("<td></td>").html("<a id=" + id + " href='#details'>" + firstName + " " + lastName + "</a>").appendTo("tr:last");
+    addField(sel, "Position:", position);
         
-    var position = $(this).find("title");
-    $("<td></td>").html(position).appendTo("tr:last");
-    
-    var dateApplied = $(this).find("dateApplied").text();
-    $("<td></td>").html($.format.date(dateApplied, "dd.MM.yyyy")).appendTo("tr:last");
-    
-    var status = $(this).find("status");
-    $("<td></td>").html(status).appendTo("tr:last");
+    var details = $(this).find("details").text();
+    addField(sel, "Details:", details);
 }
 
+// Populate Education section
+function addEducation() {
+    var sel = "#education .section-content";
+    $(sel).append("<div class='sub-section'></div>");
+    sel = sel + " .sub-section:last";
+    
+    var dateFrom = $.format.date($(this).find("dateFrom").text(), "dd.MM.yyyy");
+    var dateTo = getDateTo($.format.date($(this).find("dateTo").text(), "dd.MM.yyyy"));
+    addField(sel, "Dates:", dateFrom + " - " + dateTo);
+        
+    var school = $(this).find("educationalInstitution").text();
+    addField(sel, "School:", school);
+    
+    var details = $(this).find("details").text();
+    addField(sel, "Details:", details);
+}
+
+// Add a single cell to the search results table
+function addCell(sel, value) {
+    $(sel).append("<td>" + value + "</td>");
+}
+
+// Add a record to the search results table
+function addRecord() {
+    var sel = "#searchresults .section-content";
+    $(sel).append("<tr></tr>");
+    sel = sel + " tr:last";
+        
+    var id = $(this).find("applicantId").text();
+    addCell(sel, id);
+    
+    var fullName = $(this).find("firstName").text() + " " + $(this).find("lastName").text()  
+    addCell(sel, "<a id=" + id + " href='#details'>" + fullName + "</a>");
+        
+    var position = $(this).find("title").text();
+    addCell(sel, position);
+    
+    var dateApplied = $.format.date($(this).find("dateApplied").text(), "dd.MM.yyyy");
+    addCell(sel, dateApplied);
+    
+    var status = $(this).find("status").text();
+    addCell(sel, status);
+}
+
+// Get list of applications
 function onFormSubmit(e){
     e.preventDefault();
     $(".hidden").hide();
     $(".section-content").empty();
-        
+           
     // Build URL
     var url = buildUrl();
     
@@ -177,7 +158,7 @@ function onFormSubmit(e){
 	    dataType: "xml",
     })
     .done(function( xml ) {
-        $(xml).find("applicant").each(addRecord);
+        $(xml).find("application").each(addRecord);
     })
     .fail(function( xhr, status, errorThrown ) {
         console.log( "Error: " + errorThrown );
@@ -187,6 +168,45 @@ function onFormSubmit(e){
     $("#searchresults").show();
 };
 
+// Get selected applicant's details
+function onGetDetails(e) {
+    e.preventDefault();
+        
+    $("#details").hide();
+    $("#details .section-content").empty();
+       
+    // Get current applicant ID
+    var id = $(this).attr("id");
+    
+    // Build URL
+    var url = urlDetails + "/" + id;
+    
+    // Do GET request
+    $.ajax({
+	   url: url,
+	   type: "GET",
+	   dataType: "xml",
+    })
+    .done( function( xml ) {
+        $(xml).find("applicant").each(addPersonalData);
+        $(xml).find("experience").each(addExperience);
+        $(xml).find("education").each(addEducation);
+    })
+    .fail(function( xhr, status, errorThrown ) {
+        console.log( "Error: " + errorThrown );
+        console.log( "Status: " + status );
+        console.dir( xhr );
+    });
+        
+    $("#details").show();
+}
+
+// Reset search fields
+function onFormReset(e) {
+    e.preventDefault();
+    $("form input[type=search]").val('');    
+}
+
 $( document ).ready(function() {
     /*GOVUK.modules.start();*/
     GOVUK.stickAtTopWhenScrolling.init();
@@ -195,10 +215,13 @@ $( document ).ready(function() {
     var selectionButtons = new GOVUK.SelectionButtons($buttons);
     
     $(".hidden").hide();
-    $("form").submit(onFormSubmit);
+    
+    // Event handlers
+    $("form").on("submit", onFormSubmit);
+    $("form").on("reset", onFormReset);
+    $("form input[name=searchmethod]").on("click", onSearchMethod);
     $("#searchresults").on("click", "a", onGetDetails);
     
-    $("form input[name=searchmethod]").click(onSearchMethod);
+    // Trigger click event for ID radio button
     $("form input[value=id]").trigger("click");
-
 });

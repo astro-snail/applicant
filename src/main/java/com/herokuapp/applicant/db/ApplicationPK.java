@@ -1,27 +1,24 @@
 package com.herokuapp.applicant.db;
 
 import java.io.Serializable;
-import java.util.Date;
-
 import javax.persistence.*;
 
 /**
- * The primary key class for the work_experience database table.
+ * The primary key class for the education database table.
  * 
  */
 @Embeddable
-public class ExperiencePK implements Serializable {
+public class ApplicationPK implements Serializable {
 	//default serial version id, required for serializable classes.
 	private static final long serialVersionUID = 1L;
 
+	@Column(name="position_id")
+	private Integer positionId;
+	
 	@Column(name="applicant_id")
 	private Integer applicantId;
 
-	@Temporal(TemporalType.DATE)
-	@Column(name="date_from")
-	private Date dateFrom;
-
-	public ExperiencePK() {
+	public ApplicationPK() {
 	}
 	public Integer getApplicantId() {
 		return this.applicantId;
@@ -29,30 +26,30 @@ public class ExperiencePK implements Serializable {
 	public void setApplicantId(Integer applicantId) {
 		this.applicantId = applicantId;
 	}
-	public java.util.Date getDateFrom() {
-		return this.dateFrom;
+	public Integer getPositionId() {
+		return this.positionId;
 	}
-	public void setDateFrom(Date dateFrom) {
-		this.dateFrom = dateFrom;
+	public void setPositionId(Integer positionId) {
+		this.positionId = positionId;
 	}
 
 	public boolean equals(Object other) {
 		if (this == other) {
 			return true;
 		}
-		if (!(other instanceof ExperiencePK)) {
+		if (!(other instanceof ApplicationPK)) {
 			return false;
 		}
-		ExperiencePK castOther = (ExperiencePK)other;
+		ApplicationPK castOther = (ApplicationPK)other;
 		return 
-			this.applicantId.equals(castOther.applicantId) && this.dateFrom.equals(castOther.dateFrom);
+			this.positionId.equals(castOther.positionId) && this.applicantId.equals(castOther.applicantId);
 	}
 
 	public int hashCode() {
 		final int prime = 31;
 		int hash = 17;
+		hash = hash * prime + this.positionId.hashCode();
 		hash = hash * prime + this.applicantId.hashCode();
-		hash = hash * prime + this.dateFrom.hashCode();
 		
 		return hash;
 	}

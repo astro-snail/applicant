@@ -30,6 +30,11 @@ public class Experience implements Serializable {
 	private String details;
 
 	private String position;
+	
+	//bi-directional many-to-one association to Applicant
+	@ManyToOne
+	@JoinColumn(name="applicant_id", referencedColumnName="applicant_id", nullable=false, insertable=false, updatable=false)
+	private Applicant applicant;
 
 	public Experience() {
 	}

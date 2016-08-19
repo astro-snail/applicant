@@ -3,45 +3,54 @@ package com.herokuapp.applicant.db;
 import java.io.Serializable;
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- * The persistent class for the applicant_view database table.
+ * The persistent class for the applicant database table.
  * 
  */
 @Entity
 @XmlRootElement
-@Table(name="applicant_view")
-@NamedQueries({
-	@NamedQuery(name="Applicant.findAll", query="SELECT a FROM Applicant a ORDER BY a.applicantId"),
-	@NamedQuery(name="Applicant.findByName", query="SELECT a FROM Applicant a WHERE a.firstName = :firstName AND a.lastName = :lastName")
-})
+@Table(name="applicant")
+@NamedQuery(name="Applicant.findAll", query="SELECT a FROM Applicant a ORDER BY a.applicantId")
 public class Applicant implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@Column(name="applicant_id")
 	private Integer applicantId;
 
-	@Temporal(TemporalType.DATE)
-	@Column(name="date_applied")
-	private Date dateApplied;
+	private String address;
 
-	private String department;
+	@Temporal(TemporalType.DATE)
+	@Column(name="date_of_birth")
+	private Date dateOfBirth;
+
+	private String email;
 
 	@Column(name="first_name")
 	private String firstName;
 
+	private String gender;
+
+	private String landline;
+
 	@Column(name="last_name")
 	private String lastName;
 
-	@Column(name="position_id")
-	private Integer positionId;
+	private String mobile;
+	
+	//bi-directional many-to-one association to WorkExperience
+	@OneToMany(mappedBy="applicant")
+	@OrderBy("id.applicantId, id.dateFrom DESC")
+	private List<Experience> experience;
 
-	private String status;
-
-	private String title;
+	//bi-directional many-to-one association to Education
+	@OneToMany(mappedBy="applicant")
+	@OrderBy("id.applicantId, id.dateFrom DESC")
+	private List<Education> education;
 
 	public Applicant() {
 	}
@@ -54,20 +63,28 @@ public class Applicant implements Serializable {
 		this.applicantId = applicantId;
 	}
 
-	public Date getDateApplied() {
-		return this.dateApplied;
+	public String getAddress() {
+		return this.address;
 	}
 
-	public void setDateApplied(Date dateApplied) {
-		this.dateApplied = dateApplied;
+	public void setAddress(String address) {
+		this.address = address;
 	}
 
-	public String getDepartment() {
-		return this.department;
+	public Date getDateOfBirth() {
+		return this.dateOfBirth;
 	}
 
-	public void setDepartment(String department) {
-		this.department = department;
+	public void setDateOfBirth(Date dateOfBirth) {
+		this.dateOfBirth = dateOfBirth;
+	}
+
+	public String getEmail() {
+		return this.email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public String getFirstName() {
@@ -78,6 +95,22 @@ public class Applicant implements Serializable {
 		this.firstName = firstName;
 	}
 
+	public String getGender() {
+		return this.gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+
+	public String getLandline() {
+		return this.landline;
+	}
+
+	public void setLandline(String landline) {
+		this.landline = landline;
+	}
+
 	public String getLastName() {
 		return this.lastName;
 	}
@@ -86,28 +119,26 @@ public class Applicant implements Serializable {
 		this.lastName = lastName;
 	}
 
-	public Integer getPositionId() {
-		return this.positionId;
+	public String getMobile() {
+		return this.mobile;
 	}
 
-	public void setPositionId(Integer positionId) {
-		this.positionId = positionId;
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
+	}
+	public List<Experience> getExperience() {
+		return this.experience;
+	}
+	
+	public void setExperience(List<Experience> experience) {
+		this.experience = experience;
 	}
 
-	public String getStatus() {
-		return this.status;
+	public List<Education> getEducation() {
+		return this.education;
 	}
 
-	public void setStatus(String status) {
-		this.status = status;
+	public void setEducation(List<Education> education) {
+		this.education = education;
 	}
-
-	public String getTitle() {
-		return this.title;
-	}
-
-	public void setTitle(String title) {
-		this.title = title;
-	}
-
 }

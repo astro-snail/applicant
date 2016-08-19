@@ -1,7 +1,6 @@
 package com.herokuapp.applicant;
 
 import javax.ws.rs.core.Application;
-import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.Response;
 
 import org.glassfish.jersey.server.ResourceConfig;
@@ -9,8 +8,6 @@ import org.glassfish.jersey.test.JerseyTest;
 
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
-
-import java.util.List;
 
 import com.herokuapp.applicant.Resources;
 import com.herokuapp.applicant.db.*;
@@ -34,18 +31,29 @@ public class ResourcesTest extends JerseyTest {
     }
     
     /**
-     * Test to see that the status 200 is sent in the response to the database request.
+     * Test to see that the status 200 is sent in the response.
      */
     @Test
-    public void testApplicants() {
-        int status = target().path("resources/applicants").request().get().getStatus();
+    public void testApplications() {
+        int status = target().path("resources/applications/1/Jane/Doe").request().get().getStatus();
 
         assertEquals(200, status);
-        
     }
     
     /**
-     * Test to see that the applicant with ID = 1 is retrieved from the database and is sent in the response.
+     * Test to see that the position ID = 1 is sent in the response.
+     */
+    @Test
+    public void testPositionId() {
+        Response response = target().path("resources/positions/1").request().get();
+        Position position = response.readEntity(Position.class);
+        int id = position.getPositionId();
+
+        assertEquals(1, id);
+    }
+    
+    /**
+     * Test to see that the applicant ID = 1 is sent in the response.
      */
     @Test
     public void testApplicantId() {
@@ -54,35 +62,19 @@ public class ResourcesTest extends JerseyTest {
         int id = applicant.getApplicantId();
 
         assertEquals(1, id);
-        
     }
     
     /**
-     * Test to see that the applicant with name = "Jane Doe" is retrieved from the database and is sent in the response.
+     * Test to see that the application for position ID = 1 and applicant ID = 1 is sent in the response.
      */
     @Test
-    public void testApplicantName() {
-    	Response response = target().path("resources/applicants/Jane/Doe").request().get();
-    	assertEquals(200, response.getStatus());
-    	/*Applicant applicant = response.readEntity(Applicant.class);
-        String firstName = applicant.getFirstName();
-        String lastName = applicant.getLastName();
-
-        assertEquals("Jane", firstName);
-        assertEquals("Doe", lastName);*/
-        
-    }
-    
-    /**
-     * Test to see that the applicant details for ID = 2 are retrieved from the database and sent in the response.
-     */
-    @Test
-    public void testApplicantDetails() {
-        Response response = target().path("resources/applicants/2/details").request().get();
-        ApplicantDetails applicantDetails = response.readEntity(ApplicantDetails.class);
-        int id = applicantDetails.getApplicantId();
-
-        assertEquals(2, id);
-        
+    public void testApplicationId() {
+    	Response response = target().path("resources/applications/1/1").request().get();
+    	com.herokuapp.applicant.db.Application application = response.readEntity(com.herokuapp.applicant.db.Application.class);
+    	int positionId = application.getId().getPositionId();
+    	int applicantId = application.getId().getApplicantId();
+    	
+    	assertEquals(1, positionId);
+    	assertEquals(1, applicantId);
     }
 }

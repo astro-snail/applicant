@@ -1,0 +1,172 @@
+@import 'govuk/stylesheets/grid_layout';
+@import 'govuk/stylesheets/typography';
+@import 'govuk/stylesheets/colours';
+@import 'govuk/stylesheets/css3';
+@import 'govuk/stylesheets/design-patterns/buttons';
+
+#page-container {
+    @extend %site-width-container;
+}
+
+.grid-row {
+    @extend %grid-row;
+    
+    .column-full {
+        @include grid-column( 1 / 1 );
+    }
+    
+    .column-quarter {
+        @include grid-column( 1 / 4 );
+    }
+
+    .column-third {
+        @include grid-column( 1 / 3 );
+    }
+    
+    .column-half {
+        @include grid-column( 1 / 2 );
+    }
+    
+    .column-two-thirds {
+        @include grid-column( 2 / 3 );
+    }
+    
+    .column-three-quarters {
+        @include grid-column( 3 / 4 );
+    }
+}
+
+.hero-image {
+    @extend %outdent-to-full-width;
+}
+
+.page-header, .section-header, .table-header {
+    background: $green;
+    color: $white; 
+}
+
+table, .sub-section {
+    border-color: $border-colour;
+}
+
+td, th {
+    border-top-color: $border-colour;
+}
+
+a:link {
+    color: $link-colour;
+}
+
+a:visited {
+    color: $link-visited-colour;
+}
+
+a:active {
+    color: $link-active-colour;
+}
+
+a:hover {
+    color: $link-hover-colour;
+}
+
+body {
+    @include core-14;
+}
+
+h2 {
+    @include heading-24;
+}
+
+h3 {
+    @include copy-16;
+}
+
+.field-name, .section-header {
+    font-weight: bold;
+}
+
+.button{
+   @include button;
+}
+
+.button-secondary{
+   @include button($grey-3);
+}
+
+.focused {
+    background-color: $focus-colour;
+}
+
+.selected {
+    color: $link-active-colour;
+}
+
+.content-fixed {
+  position: fixed;
+  top: 0;
+}
+
+.shim {
+  display: block;
+}
+
+.page-header {
+    margin-bottom: 20px;
+    padding: 7px;
+}
+
+.section-header {
+    margin-bottom: 10px;
+    margin-top: 10px;
+    padding: 5px;
+    text-align: left;
+}
+
+.table-content, .form-content {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.table-content {
+    overflow-x: scroll;
+}
+
+.sub-section, table, td, th {
+    border-color: $border-colour;
+    border-width: 1px;
+    border-style: solid;
+}
+    
+.sub-section {
+    padding: 4px 8px;
+    margin-bottom: 4px;
+}  
+
+.field-name, .section-header {
+    font-weight: bold; 
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+td, th {
+    padding: 4px 8px;
+}
+
+span {
+    display: block;
+}
+
+input {
+    margin-bottom: 5px;
+}
+
+input[type=search] {
+    width: 100%;
+}
+
+button {
+    width: 30%;
+}

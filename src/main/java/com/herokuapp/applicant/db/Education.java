@@ -27,6 +27,11 @@ public class Education implements Serializable {
 
 	@Column(name="educational_institution")
 	private String educationalInstitution;
+	
+	//bi-directional many-to-one association to Applicant
+	@ManyToOne
+	@JoinColumn(name="applicant_id", referencedColumnName="applicant_id", nullable=false, insertable=false, updatable=false)
+	private Applicant applicant;
 
 	public Education() {
 	}
