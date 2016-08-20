@@ -11,7 +11,7 @@ Uses:
 	PostgreSQL JDBC Driver,
 	Jersey.
 	
-Design: GOV.UK Frontend Toolkit (https://github.com/alphagov/govuk\_frontend\_toolkit)
+Design: GOV.UK Frontend Toolkit (https://github.com/alphagov/govuk_frontend_toolkit)
 	
 Hosted by Heroku (https://frozen-thicket-70643.herokuapp.com)
 
