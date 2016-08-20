@@ -11,7 +11,7 @@ Uses:
 	PostgreSQL JDBC Driver,
 	Jersey.
 	
-Design: GOV.UK Frontend Toolkit (https://github.com/alphagov/govuk_frontend_toolkit)
+Design: GOV.UK Frontend Toolkit (https://github.com/alphagov/govuk\_frontend\_toolkit)
 	
 Hosted by Heroku (https://frozen-thicket-70643.herokuapp.com)
 
@@ -21,13 +21,19 @@ Application is built using Maven and packaged as a *.war archive.
 
 ##Database
 
-Application uses PostgreSQL database. A sample database is included at in the form of a backup file ./src/main/resources/db_backup.backup.
+Application uses PostgreSQL database. A sample database is included in the form of a backup file at:
+- ./src/main/resources/db\_backup.backup - custom format (used by Heroku PostgreSQL)
+- ./src/main/resources/db\_backup\_plain.backup - plain text format
 
-Sample database contains 2 applications from 2 applicants:
+Sample database contains 4 applications from the following applicants:
 
 **1	Jane Doe**
 
 **2	John Smith**
+
+**3 Sergei Ivanov**
+
+**4 Elena Ilyukhina**
 
 Sample database contains 1 position:
 
@@ -37,21 +43,27 @@ Sample database contains 1 position:
 
 Application expects the connection details to be stored in the environment variable **DATABASE_URL**. The format is as follows:
 
-DATABASE_URL = postgres://*username*:*password*@*host*:*port*/*dbname*
+**DATABASE_URL** = postgres://&lt;username&gt;:&lt;password&gt;@&lt;host&gt;:&lt;port&gt;/&lt;dbname&gt;
 
 ##Resources
 
 Application makes use of the following resources:
 
-*./rest/resources/applicants* - get all applicants
+- ./rest/resources/applicants - get all applicants
 
-*./rest/resources/applicants/***id** - get applicant with ID = **id**
+- ./rest/resources/applicants/&lt;id&gt; - get the applicant with ID = &lt;id&gt;
 
-*./rest/resources/applications/1* - get all applications for position with ID = 1
+- ./rest/resources/applications/1 - get all applications for position with ID = 1
 
-*./rest/resources/applications/1/***id** - get application for position 1 from candidate **id**
+- ./rest/resources/applications/1/&lt;id&gt; - get an application for position with ID = 1 from an applicant with ID = &lt;id&gt;
 
-*./rest/resources/applications/1/***firstname**/**lastname** - get application for position 1 from candidate **firstname** **lastname**
+- ./rest/resources/applications/1/&lt;firstname&gt;/&lt;lastname&gt; - get an application for position with ID = 1 from an applicant whose first name = &lt;firstname&gt; and whose last name = &lt;lastname&gt;
+
+###Updates
+20.08.2016
+- Added 2 more applicants into the database
+- Updated applicants' addresses
+- Added a database backup file in plain text format
 
 
 
