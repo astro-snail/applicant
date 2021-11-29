@@ -53,16 +53,16 @@
         </dependency>
         
         <dependency>
-        	<groupId>org.eclipse.persistence</groupId>
-        	<artifactId>eclipselink</artifactId>
-        	<version>${eclipselink.version}</version>
+        	   <groupId>org.eclipse.persistence</groupId>
+        	   <artifactId>eclipselink</artifactId>
+        	   <version>${eclipselink.version}</version>
         </dependency>
         
         <dependency>
-  			<groupId>org.postgresql</groupId>
-  			<artifactId>postgresql</artifactId>
-  			<version>${postgresql.version}</version>
-  		</dependency>
+            <groupId>org.postgresql</groupId>
+  	   <artifactId>postgresql</artifactId>
+            <version>${postgresql.version}</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -113,7 +113,7 @@
     <properties>
         <jersey.version>2.23.2</jersey.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <jetty.version>9.0.6.v20130930</jetty.version>
+        <jetty.version>9.4.33.v20201020</jetty.version>
         <eclipselink.version>2.5.2</eclipselink.version>
         <postgresql.version>9.4-1201-jdbc41</postgresql.version>
     </properties>
