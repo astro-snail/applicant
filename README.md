@@ -25,19 +25,7 @@ Application uses PostgreSQL database. A sample database is included in the form 
 - ./src/main/resources/db\_backup.backup - custom format (used by Heroku PostgreSQL)
 - ./src/main/resources/db\_backup\_plain.backup - plain text format
 
-Sample database contains 4 applications from the following applicants:
-
-**1	Jane Doe**
-
-**2	John Smith**
-
-**3 Sergei Ivanov**
-
-**4 Elena Ilyukhina**
-
-Sample database contains 1 position:
-
-**1	Java Developer**
+Sample database contains 4 job applications from 4 applicants and 1 position they apply for.
 
 ##Database connection
 
@@ -58,18 +46,3 @@ Application makes use of the following resources:
 - ./rest/resources/applications/1/&lt;id&gt; - get an application for position with ID = 1 from an applicant with ID = &lt;id&gt;
 
 - ./rest/resources/applications/1/&lt;firstname&gt;/&lt;lastname&gt; - get an application for position with ID = 1 from an applicant whose first name = &lt;firstname&gt; and whose last name = &lt;lastname&gt;
-
-###Updates
-20.08.2016
-- Added 2 more applicants into the database
-- Updated applicants' addresses
-- Added a database backup file in plain text format
-
-
-
-
-
-
-
-
-
