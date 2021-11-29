@@ -1,4 +1,4 @@
-#Test RESTful Web Application
+# Test RESTful Web Application
 
 Displays a fictitious list of job applicants together with their details such as address, phone numbers, education and work experience.
 
@@ -15,11 +15,11 @@ Design: GOV.UK Frontend Toolkit (https://github.com/alphagov/govuk_frontend_tool
 	
 Hosted by Heroku (https://frozen-thicket-70643.herokuapp.com)
 
-##Build
+## Build
 
 Application is built using Maven and packaged as a *.war archive.
 
-##Database
+## Database
 
 Application uses PostgreSQL database. A sample database is included in the form of a backup file at:
 - ./src/main/resources/db\_backup.backup - custom format (used by Heroku PostgreSQL)
@@ -27,13 +27,13 @@ Application uses PostgreSQL database. A sample database is included in the form 
 
 Sample database contains 4 job applications from 4 applicants and 1 position they apply for.
 
-##Database connection
+## Database connection
 
 Application expects the connection details to be stored in the environment variable **DATABASE_URL**. The format is as follows:
 
 **DATABASE_URL** = postgres://&lt;username&gt;:&lt;password&gt;@&lt;host&gt;:&lt;port&gt;/&lt;dbname&gt;
 
-##Resources
+## Resources
 
 Application makes use of the following resources:
 
