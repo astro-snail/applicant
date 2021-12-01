@@ -113,7 +113,7 @@
     <properties>
         <jersey.version>2.23.2</jersey.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <jetty.version>9.4.33.v20201020</jetty.version>
+        <jetty.version>9.4.34.v20201102</jetty.version>
         <eclipselink.version>2.5.2</eclipselink.version>
         <postgresql.version>9.4-1201-jdbc41</postgresql.version>
     </properties>
