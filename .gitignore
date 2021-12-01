@@ -1,2 +1,6 @@
-/target/
-/.sass-cache/
+target/
+.settings/
+.project
+.classpath
+.git
+*/.git/*
