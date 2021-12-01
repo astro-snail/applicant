@@ -9,7 +9,6 @@ import org.glassfish.jersey.test.JerseyTest;
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
-import com.herokuapp.applicant.Resources;
 import com.herokuapp.applicant.db.*;
 
 public class ResourcesTest extends JerseyTest {

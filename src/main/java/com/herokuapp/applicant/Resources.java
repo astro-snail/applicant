@@ -79,6 +79,7 @@ public class Resources {
 		return entityManagerFactory.createEntityManager();
 	}
 	
+	@SuppressWarnings("unchecked")
 	@GET
     @Produces(MediaType.APPLICATION_XML)
 	@Path("/positions")
@@ -87,7 +88,7 @@ public class Resources {
 		EntityTransaction transaction = entityManager.getTransaction();
 		transaction.begin();
 		Query query = entityManager.createNamedQuery("Position.findAll");
-	    List<Position> resultList = query.getResultList();
+		List<Position> resultList = query.getResultList();
 	    transaction.commit();
 		entityManager.close(); 
 		return resultList;
@@ -106,6 +107,7 @@ public class Resources {
 		return result;
     }
 	
+	@SuppressWarnings("unchecked")
 	@GET
     @Produces(MediaType.APPLICATION_XML)
 	@Path("/applications")
@@ -120,7 +122,8 @@ public class Resources {
 		return resultList;
 	}
 	    
-    @GET
+    @SuppressWarnings("unchecked")
+	@GET
     @Produces(MediaType.APPLICATION_XML)
     @Path("/applications/{positionId}")
     public List<Application> getApplicationsByPositionId(@PathParam("positionId") int positionId) {
@@ -152,7 +155,8 @@ public class Resources {
 		return result;
     }
     
-    @GET
+    @SuppressWarnings("unchecked")
+	@GET
     @Produces(MediaType.APPLICATION_XML)
     @Path("/applications/{positionId}/{firstName}/{lastName}")
     public List<Application> getApplicationsByPositionIdByApplicantName(@PathParam("positionId") int positionId,
@@ -171,6 +175,7 @@ public class Resources {
 		return resultList;
     }
 	
+	@SuppressWarnings("unchecked")
 	@GET
     @Produces(MediaType.APPLICATION_XML)
 	@Path("/applicants")
@@ -198,7 +203,8 @@ public class Resources {
 		return result;
     }
     
-    @GET
+    @SuppressWarnings("unchecked")
+	@GET
     @Produces(MediaType.APPLICATION_XML)
     @Path("/applicants/{id}/experience")
     public List<Experience> findExperience(@PathParam("id") int id) {
@@ -213,7 +219,8 @@ public class Resources {
 		return resultList;
     }
 	    
-    @GET
+    @SuppressWarnings("unchecked")
+	@GET
     @Produces(MediaType.APPLICATION_XML)
     @Path("/applicants/{id}/education")
     public List<Education> findEducation(@PathParam("id") int id) {
